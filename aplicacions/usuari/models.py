@@ -30,5 +30,4 @@ def create_user_usuari(sender, instance, created, **kwargs):
 
 @receiver(post_save, sender=Usuari)
 def save_user_usuari(sender, instance, **kwargs):
-    instance.profile.save()
-# Create your models here.
+    instance.save()
