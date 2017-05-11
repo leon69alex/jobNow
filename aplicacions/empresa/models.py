@@ -14,11 +14,11 @@ class Empresa(models.Model):
     #oferta = models.ForeignKey(Oferta, on_delete=models.CASCADE,)
 
 
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
+@receiver(post_save, sender=Empresa)
+def create_user_empresa(sender, instance, created, **kwargs):
     if created:
         Empresa.objects.create(user=instance)
 
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
+@receiver(post_save, sender=Empresa)
+def save_user_empresa(sender, instance, **kwargs):
     instance.profile.save()

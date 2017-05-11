@@ -23,12 +23,12 @@ class Usuari(models.Model):
     imatge = models.ImageField(upload_to='perfil/', default='perfil/default.gif')
 
 
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
+@receiver(post_save, sender=Usuari)
+def create_user_usuari(sender, instance, created, **kwargs):
     if created:
         Usuari.objects.create(user=instance)
 
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
+@receiver(post_save, sender=Usuari)
+def save_user_usuari(sender, instance, **kwargs):
     instance.profile.save()
 # Create your models here.
