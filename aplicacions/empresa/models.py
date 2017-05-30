@@ -17,13 +17,3 @@ class Empresa(models.Model):
     nif = models.CharField(max_length=8)
     #oferta = models.ForeignKey(Oferta, on_delete=models.CASCADE,)
 
-
-
-@receiver(post_save, sender=User)
-def create_user_empresa(sender, instance, created, **kwargs):
-    if created:
-        Empresa.objects.create(user=instance)
-
-@receiver(post_save, sender=User)
-def save_user_empresa(sender, instance, **kwargs):
-    instance.User.save()

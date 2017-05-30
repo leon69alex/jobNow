@@ -22,12 +22,3 @@ class Usuari(models.Model):
     ofertesPreferides = models.ForeignKey(Oferta, on_delete=models.CASCADE,)
     imatge = models.ImageField(upload_to='perfil/', default='perfil/default.gif')
 
-
-@receiver(post_save, sender=Usuari)
-def create_user_usuari(sender, instance, created, **kwargs):
-    if created:
-        Usuari.objects.create(user=instance)
-
-@receiver(post_save, sender=Usuari)
-def save_user_usuari(sender, instance, **kwargs):
-    instance.save()

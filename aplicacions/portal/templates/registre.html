@@ -1,0 +1,72 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Registre</title>
+    {% load static %}
+    <!-- DatePicker CSS -->
+    <link rel="stylesheet" href="{% static 'plugins/css/datetimepicker/bootstrap-datepicker.min.css' %}">
+    <!-- BootStrap CSS -->
+    <link rel="stylesheet" href="{% static 'plugins/css/bootstrap/bootstrap.min.css' %}">
+    <!-- LoginCSS -->
+    <link rel="stylesheet" href="{% static 'css/portal/login/login.css' %}">
+    <!-- Normalize CSS -->
+    <link rel="stylesheet" href="{% static 'css/portal/login/normalize.min.css' %}">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="{% static 'plugins/css/fontawesome/font-awesome.min.css' %}">
+    <!-- Logo Pestanya -->
+    <link rel="shortcut icon" href="{% static 'media/icon.png' %}">
+</head>
+{% block content %}
+
+   {% for message in messages %}
+    <div id="missatgealert" class="alert alert-{{ message.tags }} col-3 pull-left">{{ message }}</div>
+{% endfor %}
+
+<body>
+<div class="row">
+    <div class="col-sm-4 col-sm-offset-4">
+		<h1 class="titol text-center">{{ capcelera }}</h1>
+		<form id="formregister" method="post">
+			{% csrf_token %}
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+            {% for field in form.visible_fields %}
+            {{field.label_tag}}
+			{{ field }}
+                <label><pre></pre></label>
+            {% endfor %}
+            <div class="text-center">
+                <input class="check" type="checkbox" required />
+                <h3 class="check2" style="color:white">Acepto les condicions i termes d'ús</h3>
+            </div>
+			<button type="submit" class="btn btn-primary btn-block btn-large">REGISTRAR</button>
+			<br>
+			<button onclick="window.location.href='{% url 'portal:index' %}'" class="btn btn-default btn-block btn-large"><i class="fa fa-home"></i> TORNAR A L'INICI</button>
+		</form>
+	</div>
+</div>
+
+</body>
+
+</html>
+
+<!-- jQuery -->
+<script src="{% static 'plugins/js/jquery/jquery-3.1.1.min.js' %}"></script>
+<!-- JS Scripts -->
+<script src="{% static 'js/portal/login/login.js' %}"></script>
+<script src="{% static 'js/portal/login/prefixfree.min.js' %}"></script>
+<!-- DateTimePicker -->
+<script src="{% static 'plugins/js/datetimepicker/bootstrap-datepicker.js' %}"></script>
+<!-- Register JS -->
+<script src="{% static 'js/portal/register/register.js' %}"></script>
+
+<script>
+    $(document).ready(function(){
+        $("#missatgealert").ready(function(){
+            $("#missatgealert").fadeOut(5000);
+        });
+    });
+</script>
+
+{% endblock %}
